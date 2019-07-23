@@ -1,0 +1,35 @@
+{
+  "name": "release-image",
+  "version": "0.1.0",
+  "description": "Generate images from changelogs",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier src/**/*.ts --write"
+  },
+  "bin": {
+    "release-image": "./run.js"
+  },
+  "keywords": [
+    "release",
+    "chagelog",
+    "image"
+  ],
+  "author": "",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@types/changelog-parser": "^2.7.1",
+    "@types/command-line-args": "^5.0.0",
+    "@types/line-reader": "0.0.28",
+    "@types/marked": "^0.6.5",
+    "@types/puppeteer": "^1.12.4",
+    "changelog-parser": "^2.8.0",
+    "command-line-args": "^5.1.1",
+    "line-reader": "^0.4.0",
+    "marked": "^0.6.3",
+    "puppeteer": "^1.18.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
