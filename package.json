@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier src/**/*.ts --write"
+    "format": "prettier src/**/*.ts --write",
+    "image": "node run.js"
   },
   "bin": {
     "release-image": "./run.js"
