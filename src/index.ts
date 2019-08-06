@@ -91,6 +91,7 @@ export const run = async () => {
   const page = await browser.newPage();
   await page.setViewport({width: 800, height: 800, deviceScaleFactor: 2});
   await page.setContent(html);
+  await page.evaluate(`document.fonts.ready`);
   const bounds = await page.evaluate(`
     document.documentElement.getBoundingClientRect().toJSON()
   `);
