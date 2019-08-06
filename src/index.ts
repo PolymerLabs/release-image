@@ -18,6 +18,7 @@ import marked = require('marked');
 import puppeteer = require('puppeteer');
 import fs = require('fs');
 import util = require('util');
+import path = require('path');
 
 const readFile = util.promisify(fs.readFile);
 
@@ -32,7 +33,8 @@ export const run = async () => {
   const version = (options as any).version;
 
   const packageJson = JSON.parse(
-    await readFile('package.json', {encoding: 'utf-8'})
+    await readFile(path.join(path.dirname(filename), 'package.json'), {encoding:
+      'utf-8'})
   );
   const packageName = packageJson.name;
 
