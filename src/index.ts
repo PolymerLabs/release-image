@@ -96,7 +96,7 @@ export const run = async () => {
   await page.evaluate(`document.fonts.ready`);
   const bounds = await page.evaluate(`
     document.documentElement.getBoundingClientRect().toJSON()
-  `);
+  `) as DOMRect;
   await page.screenshot({
     path: 'release.png',
     encoding: 'binary',
