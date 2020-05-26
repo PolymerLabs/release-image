@@ -27,6 +27,36 @@ const optionDefinitions = [
   {name: 'version', type: String},
 ];
 
+// from https://github.com/ejrbuss/markdown-to-txt/blob/master/src/markdown-to-txt.ts
+const blockFn = (block: string) => block + '\n';
+const inlineFn = (text: string) => text;
+const newlineFn = () => '\n';
+const emptyFn = () => '';
+
+const txtRenderer = {
+  // Block elements
+  code: blockFn,
+  blockquote: blockFn,
+  html: emptyFn,
+  heading: blockFn,
+  hr: emptyFn,
+  list: blockFn,
+  listitem: (text: string) => blockFn(text),
+  paragraph: blockFn,
+  table: (header: string, body: string) => blockFn(header) + blockFn(body),
+  tablerow: blockFn,
+  tablecell: blockFn,
+  // Inline elements
+  strong: inlineFn,
+  em: inlineFn,
+  codespan: inlineFn,
+  br: newlineFn,
+  del: inlineFn,
+  link: (_0: string, _1: string, text: string) => inlineFn(text),
+  image: (_0: string, _1: string, text: string) => inlineFn(text),
+  text: inlineFn,
+};
+
 export const run = async () => {
   const options = commandLineArgs(optionDefinitions);
   const filename = (options as any).file || 'CHANGELOG.md';
@@ -47,6 +77,11 @@ export const run = async () => {
   if (release === undefined) {
     throw new Error('no release found');
   }
+
+  const title = marked(release.title, {
+    renderer: txtRenderer as any,
+  });
+
   const body = marked(release.body);
   // colors taken from https://github.com/dracula/dracula-theme
   const html = `
@@ -84,7 +119,7 @@ export const run = async () => {
         </style>
       </head>
       <body>
-        <h2><span class="name">${packageName}</span> ${release.title}</h2>
+        <h2><span class="name">${packageName}</span> ${title}</h2>
         ${body}
       </body>
     </html>
