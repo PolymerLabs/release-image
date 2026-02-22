@@ -28,7 +28,7 @@
     "command-line-args": "^5.1.1",
     "line-reader": "^0.4.0",
     "marked": "^0.6.3",
-    "puppeteer": "^1.18.1"
+    "puppeteer": "^24.37.5"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
